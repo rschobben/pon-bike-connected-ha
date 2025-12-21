@@ -53,18 +53,9 @@ Availability of sensors depends on what the PON API exposes per brand and model.
 
 ## Known Limitations / Issues
 
-### ⚠️ Battery statistics (Urban Arrow)
-
-For **Urban Arrow** bikes, the API currently reports:
-
-```
-moduleCharge = 100%
-```
-
-…regardless of actual battery state.
-
-This appears to be a **PON backend issue**, not an integration bug.  
-Until PON exposes correct battery telemetry, Home Assistant will always show 100%.
+Different drive units have different datasets,data via Bosch BES3 drivesets is limited,
+chargepercentage is always provided as 100% by the PON API. This is not a limitation of this integration but of the data PON provides based on the data available for the bike.
+Also see data-act.pon.bike/docs/connected-bike (Different drive units, different datasets)
 
 ---
 
