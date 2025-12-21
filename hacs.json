@@ -1,0 +1,8 @@
+{
+  "name": "PON Bike Connected",
+  "content_in_root": false,
+  "domain": "pon_bike_connected_ha",
+  "iot_class": "cloud_polling",
+  "homeassistant": "2025.12.0"
+}
+

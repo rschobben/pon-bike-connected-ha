@@ -1,0 +1,6 @@
+{
+  "title": "PON Bike Connected",
+  "application_credentials": {
+    "description": "Create OAuth credentials in the provider portal, then enter Client ID and Client Secret here. {console_url}"
+  }
+}

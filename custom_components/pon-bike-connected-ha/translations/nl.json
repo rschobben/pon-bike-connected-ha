@@ -1,0 +1,6 @@
+{
+  "title": "PON Bike Connected",
+  "application_credentials": {
+    "description": "Maak OAuth-inloggegevens aan in het providerportaal en vul hier Client ID en Client Secret in. {console_url}"
+  }
+}
