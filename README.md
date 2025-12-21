@@ -26,14 +26,14 @@ If you rely on this integration for critical automations or dashboards, please b
 
 ## Features
 
-- 🔐 OAuth2 (PKCE, public client — no client secret)
-- 🚲 One Home Assistant **device per bike**
-- 📍 GPS location via `device_tracker`
-- 📊 Telemetry sensors (currently odometer, module/battery charge)
-- 🏷 Friendly bike naming (nickname + frame number)
-- 🔄 Automatic token refresh (handled by Home Assistant)
-- 🧠 Robust polling coordinator
-- ☁️ Cloud polling (`iot_class: cloud_polling`)
+- OAuth2 (PKCE, public client — no client secret)
+- One Home Assistant **device per bike**
+- GPS location via `device_tracker`
+- Telemetry sensors (currently odometer, module/battery charge)
+- Friendly bike naming (nickname + frame number)
+- Automatic token refresh (handled by Home Assistant)
+- Robust polling coordinator
+- Cloud polling (`iot_class: cloud_polling`)
 
 ---
 
@@ -47,6 +47,7 @@ This integration uses the **PON Bike Connected** platform and is expected to wor
 - Other PON-connected bikes using the same backend
 
 Availability of sensors depends on what the PON API exposes per brand and model.
+
 
 ---
 
@@ -69,6 +70,37 @@ Until PON exposes correct battery telemetry, Home Assistant will always show 100
 
 ## Installation
 
+The integration required an active "connected" subscription using the Gazelle Connect, Urban Arrow Connected or Kalkhoff Smart Ebike apps (IOS or Android).
+Once this is setup the bikes in these apps will be linked to a pon.bike account, after linking some time may be required before the bikes show up.
+
+### Ensure bike visilibty on PON consumer portal (DON'T SKIP, DO THIS FIRST)
+
+1. Create account on https://consumer-account.pon.bike/ 
+2. Ensure bike is visibile under "My bikes"
+
+### Create PON developer account and application (DON'T SKIP, DO THIS SECOND)
+
+1. Create a POMN developer account at https://data-act.pon.bike/
+  - click login
+  - create Sign up
+
+2. Add a New Application
+  - Name the Application something like "Home Assistant integration"
+  - Add similar description
+  - Use following as callback, allowed origin, allowed logut URLs:
+    https://my.home-assistant.io/redirect/oauth
+  - Use anything as client aliases (for example 1234)
+  - Copy the Application ID to the clipboard, you will need it as OAuth Client_ID during the integration setup.
+
+### HACS installation (recommended)
+
+1. ensure you have HACS installed in home assistant
+2. Open HACS
+3. Add this github repo as custom repository )type: Integration).
+4. Install "PON Bike Connected" as an integration from the Custom section.
+5. Restart home Assistant
+
+
 ### Manual installation (recommended for now)
 
 1. Copy the integration folder into:
@@ -88,8 +120,9 @@ Until PON exposes correct battery telemetry, Home Assistant will always show 100
 This integration uses Home Assistant’s **Application Credentials** framework.
 
 You will need:
-- A PON Bike Connected OAuth **client_id**
-- No client secret (public PKCE client)
+- Your default browser already logged in to https://consumer-account.pon.bike/
+- A PON Bike Connected OAuth **client_id** (this is the applcation ID), see above and do that FIRST.
+- No client secret (public PKCE client) --> enter something like "dummy"
 
 During setup, Home Assistant will:
 - Redirect you to the PON login page
@@ -97,17 +130,13 @@ During setup, Home Assistant will:
 - Store tokens securely
 - Automatically refresh tokens when needed
 
+When you are redirected to the PON consumer portal to authorize the bike make sure you click "add bike" and enable Location, Telemetry and Bike Status(IOT).
+
+The bike should show up as a device in home assistant.
+
 ### OAuth details (for reference)
-
-- **Scope**
-  ```
-  openid offline_access authorization:read
-  ```
-- **Audience**
-  ```
-  https://data-act.connected.pon.bike/
-  ```
-
+- **Scope** : openid offline_access authorization:read
+- **Audience** : https://data-act.connected.pon.bike/
 These are handled automatically by the integration.
 
 ---
@@ -153,8 +182,7 @@ Currently implemented:
 Planned (no guarantees):
 
 - 🔁 Multi-account support
-- 📡 MQTT / streaming telemetry
-- 🧪 Diagnostics support
+- 📡 MQTT / streaming telemetry (PON has not published endpoint yet)
 - 📦 HACS publication
 - 📊 Additional telemetry sensors
 - 🧼 Entity allow-listing / pruning
