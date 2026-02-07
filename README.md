@@ -1,5 +1,7 @@
 # PON Bike (Urban Arrow, Gazelle, Kalkhoff) Home Assistant Integration
 
+> ⚠️ *: Feb 7 2026: Currently the PON bike API used to retrieve lastest bike status including GPS location is broken and returing a 500 server error, this seems to be on the PON side. Have reported the issue.
+
 A custom **Home Assistant integration** for connected PON bicycles, including **Urban Arrow**, **Gazelle**, **Kalkhoff**, and other PON-connected brands.
 
 This integration connects to the **PON Bike Connected cloud API** and exposes your bike(s) as devices in Home Assistant, including live telemetry and GPS location.

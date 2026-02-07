@@ -1,7 +1,7 @@
 {
   "domain": "pon_bike_connected_ha",
   "name": "PON Bike Connected (Urban Arrow, Gazelle, Kalkhoff)",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "config_flow": true,
   "documentation": "https://github.com/rschobben/pon_bike_connected_ha",
   "issue_tracker": "https://github.com/rschobben/pon_bike_connected_ha/issues",
