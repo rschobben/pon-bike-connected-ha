@@ -73,7 +73,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await coordinator.async_config_entry_first_refresh()
     dev_reg = dr.async_get(hass)
     for bike in coordinator.data.get("bikes", []):
-        device = dev_reg.async_get_device(identifiers={(DOMAIN, bike.get("bikeId"))})
+#        device = dev_reg.async_get_device(identifiers={(DOMAIN, bike.get("bikeId"))})
+        device = dev_reg.async_get_device_by_identifier(
+           (DOMAIN, bike.get("bikeId")), entry.entry_id,
+        )
         if device:
             dev_reg.async_update_device(
                 device.id,
